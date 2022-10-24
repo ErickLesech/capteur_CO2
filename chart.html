@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Test Chart.js</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+	<h1>chart</h1>
+	<canvas id="myChart" width="400" height="400"></canvas>
+	<script>
+	var firstTime = false
+
+	function update(tableau) {
+			tableau.shift()
+			tableau.push( Math.floor(Math.random() * (100 - 1 + 1))+1)
+			return tableau
+	}
+
+	const ctx = document.getElementById('myChart').getContext('2d');
+
+	var tableau = []
+	var tabLabel = []
+
+	for (var i = 27 - 1; i >= 0; i--) {
+		tableau[i] = Math.floor(Math.random() * (100 - 1 + 1))+1
+	}
+	
+	for (var i = 27 - 1; i >= 0; i--) {
+		tabLabel[i] = 'label'+i
+	}
+
+	var data = {
+		labels : tabLabel,
+		datasets : [{
+			label : 'test courbe',
+			backgroundColor : 'green',
+			borderColor : 'green',
+			borderWidth : 1,
+			radius : 0,
+			data: tableau
+				
+		}]
+	}
+
+	var options = {
+		responsive : false,
+		/*animation: {
+            onProgress: function(context) {
+       		 if (context.initial) {
+          		initProgress.value = context.currentStep / context.numSteps;
+        		} else {
+          	
+          		progress.value = context.currentStep / context.numSteps;
+        	}
+      	}
+        }*/
+	}
+
+	var config = {
+		type : 'line',
+		data : data,
+		options : options
+	}
+
+	const myChart = new Chart(ctx, config);
+</script>
+
+</body>
+</html>
