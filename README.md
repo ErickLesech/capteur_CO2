@@ -5,3 +5,6 @@ Projet Capteur C02
 - Page html
 - Projet PCB
 - Code arduino
+
+Kahina AIT OUFELLA
+Erick LE SECH
