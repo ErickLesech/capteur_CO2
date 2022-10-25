@@ -7,63 +7,112 @@
 </head>
 <body>
 	<h1>chart</h1>
-	<canvas id="myChart" width="400" height="400"></canvas>
-	<script>
-	var firstTime = false
+	<canvas id="myChart" width="600" height="400"></canvas>
+	<script type='module'>
 
-	function update(tableau) {
-			tableau.shift()
-			tableau.push( Math.floor(Math.random() * (100 - 1 + 1))+1)
-			return tableau
-	}
+	//import firebase library
 
-	const ctx = document.getElementById('myChart').getContext('2d');
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js"
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js"
+		// Import the functions you need from the SDKs you need
+	import { getDatabase, ref, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js"
 
-	var tableau = []
-	var tabLabel = []
+		const firebaseConfig = {
+    		apiKey: "AIzaSyASUdodD9B57Pq5mgmArHja6ZGeRfcMvBs",
+    		authDomain: "esp32project-c06f1.firebaseapp.com",
+    		databaseURL: "https://esp32project-c06f1-default-rtdb.europe-west1.firebasedatabase.app",
+    		projectId: "esp32project-c06f1",
+    		storageBucket: "esp32project-c06f1.appspot.com",
+    		messagingSenderId: "800242740503",
+    		appId: "1:800242740503:web:3ab0cf75ba8420a84b1b52",
+    		measurementId: "G-D8QC3SKVT4"
+  };
 
-	for (var i = 27 - 1; i >= 0; i--) {
-		tableau[i] = Math.floor(Math.random() * (100 - 1 + 1))+1
-	}
-	
-	for (var i = 27 - 1; i >= 0; i--) {
-		tabLabel[i] = 'label'+i
-	}
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig)
+  const analytics = getAnalytics(app)
 
-	var data = {
-		labels : tabLabel,
-		datasets : [{
-			label : 'test courbe',
-			backgroundColor : 'green',
-			borderColor : 'green',
-			borderWidth : 1,
-			radius : 0,
-			data: tableau
+  const db = getDatabase()
+  console.log(db)
+
+  var tab_co2 = []
+  var tab_time = []
+
+  var tempo
+
+  get((child(ref(db),'Micro_11A'))).then((snapshot) => {
+		  		if(snapshot.exists()){
+		  			console.log(snapshot.val())
+		  		}else {
+   					 console.log("No data available")
+  		}
+		}).catch((error) => {
+ 		 console.error(error)
+		});
+
+let refMin = 'Micro_11A'
+
+		get((child(ref(db),refMin))).then((snapshot) => {
+			snapshot.forEach(function(childSnapshot){
+				console.log("childsnapchot jour" + childSnapshot.val())
+				if(childSnapshot.exists()){
+					console.log("childsnapchot heure" + childSnapshot.val())
+
+    					childSnapshot.forEach(function(childSnapshot){
+							console.log("childsnapchot min" + childSnapshot.val())
+							if(childSnapshot.exists()){
+								//const childKey = childSnapshot.key + "";
+    							//const childData = childSnapshot.val() + "";
+
+    							childSnapshot.forEach(function(childSnapshot){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+    								tab_time.push(childSnapshot.val().time + "")
+   
+       			 					console.log("valeur tab_time : " + tab_time)
+    			 					console.log("valeur tab_co2 : " + tab_co2)
+    			 					console.log(typeof childData)
+    			 				})
+    						}
+    					})
+    				}
+    			})
+		  		
+		}).then(() =>{
+				const ctx = document.getElementById('myChart').getContext('2d');
+
+    			 console.log("dans then valeur tab_co2 : " + tab_co2)
+
+				var data = {
+					labels : tab_time,
+					datasets : [{
+						label : 'test courbe',
+						backgroundColor : 'green',
+						borderColor : 'green',
+						borderWidth : 1,
+						radius : 0,
+						data: tab_co2
 				
-		}]
-	}
+					}]
+				}
 
-	var options = {
-		responsive : false,
-		/*animation: {
-            onProgress: function(context) {
-       		 if (context.initial) {
-          		initProgress.value = context.currentStep / context.numSteps;
-        		} else {
-          	
-          		progress.value = context.currentStep / context.numSteps;
-        	}
-      	}
-        }*/
-	}
+				var options = {
+					responsive : false,
+				}
 
-	var config = {
-		type : 'line',
-		data : data,
-		options : options
-	}
+				var config = {
+					type : 'line',
+					data : data,
+					options : options
+				}
 
-	const myChart = new Chart(ctx, config);
+				const myChart = new Chart(ctx, config);
+
+
+		})
+
+	
+		console.log("val fin de tab : " + tab_co2);
+
 </script>
 
 </body>
