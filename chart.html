@@ -93,15 +93,16 @@ let refMicro_11A = 'Micro_11A'
 
 			
 				const ctx = document.getElementById('myChart').getContext('2d');
+				const canva = document.getElementById('myChart');
 
-				var gradienstroke = ctx.createLinearGradient(500, 0, 100, 0);
+				var gradienstroke = ctx.createLinearGradient(0, canva.width, 0, 0);
 
 				gradienstroke.addColorStop(0, "#41fc03");
 				gradienstroke.addColorStop(0.5, "#c9f005")
 				gradienstroke.addColorStop(1, "#cf0617");
 
 
-				var gradientfill = ctx.createLinearGradient(500, 0, 100, 0);
+				var gradientfill = ctx.createLinearGradient(0, canva.width, 0, 0);
 
 				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
 				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
