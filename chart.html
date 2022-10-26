@@ -50,9 +50,9 @@
  		 console.error(error)
 		});
 
-let refMin = 'Micro_11A'
+let refMicro_11A = 'Micro_11A'
 
-		get((child(ref(db),refMin))).then((snapshot) => {
+		get((child(ref(db),refMicro_11A))).then((snapshot) => {
 			snapshot.forEach(function(childSnapshot){
 				console.log("childsnapchot jour" + childSnapshot.val())
 				if(childSnapshot.exists()){
@@ -65,44 +65,84 @@ let refMin = 'Micro_11A'
     							//const childData = childSnapshot.val() + "";
 
     							childSnapshot.forEach(function(childSnapshot){
-									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
-    								tab_time.push(childSnapshot.val().time + "")
+
+    								if(childSnapshot.exists()){
+										tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+    									tab_time.push(childSnapshot.val().time + "")
    
-       			 					console.log("valeur tab_time : " + tab_time)
-    			 					console.log("valeur tab_co2 : " + tab_co2)
-    			 					console.log(typeof childData)
+       			 						console.log("valeur tab_time : " + tab_time)
+    			 						console.log("valeur tab_co2 : " + tab_co2)
+    			 					
+    			 					}else{
+    			 						console.log("no data time and rate co2")
+    			 					}
     			 				})
+
+    						}else{
+
+    							console.log("no min childsnapshot")
     						}
     					})
+
+    				}else{
+    					console.log("no hour exists")
     				}
     			})
 		  		
 		}).then(() =>{
+
+			
 				const ctx = document.getElementById('myChart').getContext('2d');
 
+				var gradienstroke = ctx.createLinearGradient(500, 0, 100, 0);
+
+				gradienstroke.addColorStop(0, "#41fc03");
+				gradienstroke.addColorStop(0.5, "#c9f005")
+				gradienstroke.addColorStop(1, "#cf0617");
+
+
+				var gradientfill = ctx.createLinearGradient(500, 0, 100, 0);
+
+				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
+
     			 console.log("dans then valeur tab_co2 : " + tab_co2)
+
+    			 var delayBetweenPoints = 1000/tab_co2.length
 
 				var data = {
 					labels : tab_time,
 					datasets : [{
-						label : 'test courbe',
-						backgroundColor : 'green',
-						borderColor : 'green',
-						borderWidth : 1,
-						radius : 0,
-						data: tab_co2
+						label : 'test courbe Micro_11A',
+						backgroundColor : gradientfill,
+						borderColor : gradienstroke,
+						borderWidth : 4,
+						radius : 1,
+						data: tab_co2,
+						fill : true,
 				
-					}]
+					}],
+
+					
 				}
 
 				var options = {
 					responsive : false,
+					plugins:{
+						title:{
+						 	display: true,
+        					text: 'Chart of rate CO2 in Micro_11A'
+        				}
+        			}
 				}
 
 				var config = {
 					type : 'line',
 					data : data,
 					options : options
+					
 				}
 
 				const myChart = new Chart(ctx, config);
