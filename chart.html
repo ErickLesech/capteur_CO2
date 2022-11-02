@@ -7,13 +7,18 @@
 </head>
 <body>
 	<h1>chart</h1>
-	<canvas id="myChart" width="600" height="400"></canvas>
+	<div style="display: inline-block; text-align: center;">
+		<canvas style="display: inline; " id="myChartCo2" width="400" height="300"></canvas>
+		<canvas style="display: inline; " id="myChartTemperature" width="400" height="300"></canvas>
+		<canvas style="display: inline; " id="myChartHumidite" width="400" height="300"></canvas>
+	</div>
+
 	<script type='module'>
 
 	//import firebase library
 
 	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js"
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js"
+  	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js"
 		// Import the functions you need from the SDKs you need
 	import { getDatabase, ref, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js"
 
@@ -37,6 +42,8 @@
 
   var tab_co2 = []
   var tab_time = []
+  var tab_temperature = []
+  var tab_humidite = []
 
   var tempo
 
@@ -69,9 +76,14 @@ let refMicro_11A = 'Micro_11A'
     								if(childSnapshot.exists()){
 										tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
     									tab_time.push(childSnapshot.val().time + "")
+    									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+    									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
    
        			 						console.log("valeur tab_time : " + tab_time)
     			 						console.log("valeur tab_co2 : " + tab_co2)
+
+    			 						console.log("valeur tab_temperature : " + tab_temperature)
+    			 						console.log("valeur tab_humidite : " + tab_humidite)
     			 					
     			 					}else{
     			 						console.log("no data time and rate co2")
@@ -92,17 +104,23 @@ let refMicro_11A = 'Micro_11A'
 		}).then(() =>{
 
 			
-				const ctx = document.getElementById('myChart').getContext('2d');
-				const canva = document.getElementById('myChart');
+				const chart_co2 = document.getElementById('myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('myChartHumidite').getContext('2d');
+    			 
 
-				var gradienstroke = ctx.createLinearGradient(0, canva.width, 0, 0);
+    			 // graphe pour le CO2
+
+				const canva = document.getElementById('myChartCo2');
+
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.width, 0, 0);
 
 				gradienstroke.addColorStop(0, "#41fc03");
 				gradienstroke.addColorStop(0.5, "#c9f005")
 				gradienstroke.addColorStop(1, "#cf0617");
 
 
-				var gradientfill = ctx.createLinearGradient(0, canva.width, 0, 0);
+				var gradientfill = chart_co2.createLinearGradient(0, canva.width, 0, 0);
 
 				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
 				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
@@ -111,7 +129,7 @@ let refMicro_11A = 'Micro_11A'
 
     			 console.log("dans then valeur tab_co2 : " + tab_co2)
 
-    			 var delayBetweenPoints = 1000/tab_co2.length
+
 
 				var data = {
 					labels : tab_time,
@@ -133,8 +151,7 @@ let refMicro_11A = 'Micro_11A'
 					responsive : false,
 					plugins:{
 						title:{
-						 	display: true,
-        					text: 'Chart of rate CO2 in Micro_11A'
+						 	display: true
         				}
         			}
 				}
@@ -146,10 +163,97 @@ let refMicro_11A = 'Micro_11A'
 					
 				}
 
-				const myChart = new Chart(ctx, config);
+				const myChart = new Chart(chart_co2, config);
 
 
-		})
+				// graphe de temperature
+
+				const canva_temperature = document.getElementById('myChartTemperature');
+
+
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.width, 0, 0);
+
+				gradienstroke_temp.addColorStop(0, "#4A19DA");
+				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#DA192D");
+
+
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.width, 0, 0);
+
+				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
+				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+
+				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
+
+
+
+				var config2 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'test courbe temperature Micro_11A',
+							backgroundColor : gradientfill_temp,
+							borderColor : gradienstroke_temp,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_temperature,
+							fill : true,
+				
+						}],
+
+					},
+					options : options
+
+				}
+
+				const myChart2 = new Chart(chart_temp, config2);
+
+				// graphe d'humidité
+
+
+			   const canva_humidite = document.getElementById('myChartHumidite');
+
+
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.width, 0, 0);
+
+				gradienstroke.addColorStop(0, "#F2F206");
+				gradienstroke.addColorStop(0.5, "#2AF206")
+				gradienstroke.addColorStop(1, "#0646F2");
+
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.width, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(6, 70, 242 ,0.6)");
+
+
+				var config3 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'test courbe humidité Micro_11A',
+							backgroundColor : gradientfill,
+							borderColor : gradienstroke,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_humidite,
+							fill : true,
+				
+						}],
+
+					},
+					options : options
+
+				}
+
+				const myChart3 = new Chart(chart_humidite, config3);
+
+
+
+		}) // fin then
 
 	
 		console.log("val fin de tab : " + tab_co2);
