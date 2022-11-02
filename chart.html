@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
-	<h1 style="text-align: center;">Chart</h1>
+	<h1 style="text-align: center;">MICRO 1.1A</h1>
 	<div style="display: inline-block; text-align: center;">
 		<canvas style="display: inline; text-align: center;" id="myChartCo2" width="400" height="300"></canvas>
 		<canvas style="display: inline; text-align: center;" id="myChartTemperature" width="400" height="300"></canvas>
@@ -38,7 +38,6 @@
   const analytics = getAnalytics(app)
 
   const db = getDatabase()
-  console.log(db)
 
   var tab_co2 = []
   var tab_time = []
@@ -103,7 +102,7 @@ let refMicro_11A = 'Micro_11A'
 		  		
 		}).then(() =>{
 
-			
+
 				const chart_co2 = document.getElementById('myChartCo2').getContext('2d');
 				const chart_temp = document.getElementById('myChartTemperature').getContext('2d');
 				const chart_humidite = document.getElementById('myChartHumidite').getContext('2d');
@@ -127,14 +126,12 @@ let refMicro_11A = 'Micro_11A'
 
 				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
 
-    			 console.log("dans then valeur tab_co2 : " + tab_co2)
-
-
+    			console.log("dans then valeur tab_co2 : " + tab_co2)
 
 				var data = {
 					labels : tab_time,
 					datasets : [{
-						label : 'Courbe CO2 Micro_11A',
+						label : 'Taux de CO2 dans la salle par rapport au temps',
 						backgroundColor : gradientfill,
 						borderColor : gradienstroke,
 						borderWidth : 4,
@@ -149,9 +146,22 @@ let refMicro_11A = 'Micro_11A'
 
 				var options = {
 					responsive : false,
+					scales:{
+						y:{
+							title : {
+								display: true,
+								text : 'En ppm',
+								weight : 'bold'
+							}
+						}
+					},
 					plugins:{
 						title:{
 						 	display: true
+        				},
+        				legend:{
+        					display : true,
+        					label : 'ppm'
         				}
         			}
 				}
@@ -192,7 +202,7 @@ let refMicro_11A = 'Micro_11A'
 					data : {
 						labels : tab_time,
 						datasets : [{
-							label : 'Courbe temperature Micro_11A',
+							label : 'Température de la salle par rapport au temps',
 							backgroundColor : gradientfill_temp,
 							borderColor : gradienstroke_temp,
 							borderWidth : 4,
@@ -203,7 +213,22 @@ let refMicro_11A = 'Micro_11A'
 						}],
 
 					},
-					options : options
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En °C'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
+					}
 
 				}
 
@@ -234,7 +259,7 @@ let refMicro_11A = 'Micro_11A'
 					data : {
 						labels : tab_time,
 						datasets : [{
-							label : 'Courbe humidité Micro_11A',
+							label : 'Taux d\'humidité dans la salle par rapport au temps',
 							backgroundColor : gradientfill,
 							borderColor : gradienstroke,
 							borderWidth : 4,
@@ -245,7 +270,22 @@ let refMicro_11A = 'Micro_11A'
 						}],
 
 					},
-					options : options
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En %'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
+					}
 
 				}
 
