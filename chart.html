@@ -6,11 +6,11 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
-	<h1>chart</h1>
+	<h1 style="text-align: center;">Chart</h1>
 	<div style="display: inline-block; text-align: center;">
-		<canvas style="display: inline; " id="myChartCo2" width="400" height="300"></canvas>
-		<canvas style="display: inline; " id="myChartTemperature" width="400" height="300"></canvas>
-		<canvas style="display: inline; " id="myChartHumidite" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="myChartCo2" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="myChartTemperature" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="myChartHumidite" width="400" height="300"></canvas>
 	</div>
 
 	<script type='module'>
@@ -113,14 +113,14 @@ let refMicro_11A = 'Micro_11A'
 
 				const canva = document.getElementById('myChartCo2');
 
-				var gradienstroke = chart_co2.createLinearGradient(0, canva.width, 0, 0);
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
 
 				gradienstroke.addColorStop(0, "#41fc03");
 				gradienstroke.addColorStop(0.5, "#c9f005")
 				gradienstroke.addColorStop(1, "#cf0617");
 
 
-				var gradientfill = chart_co2.createLinearGradient(0, canva.width, 0, 0);
+				var gradientfill = chart_co2.createLinearGradient(0, canva.height, 0, 0);
 
 				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
 				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
@@ -134,7 +134,7 @@ let refMicro_11A = 'Micro_11A'
 				var data = {
 					labels : tab_time,
 					datasets : [{
-						label : 'test courbe Micro_11A',
+						label : 'Courbe CO2 Micro_11A',
 						backgroundColor : gradientfill,
 						borderColor : gradienstroke,
 						borderWidth : 4,
@@ -171,14 +171,14 @@ let refMicro_11A = 'Micro_11A'
 				const canva_temperature = document.getElementById('myChartTemperature');
 
 
-				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.width, 0, 0);
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
 				gradienstroke_temp.addColorStop(0, "#4A19DA");
 				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
 				gradienstroke_temp.addColorStop(1, "#DA192D");
 
 
-				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.width, 0, 0);
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
 				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
 				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
@@ -192,7 +192,7 @@ let refMicro_11A = 'Micro_11A'
 					data : {
 						labels : tab_time,
 						datasets : [{
-							label : 'test courbe temperature Micro_11A',
+							label : 'Courbe temperature Micro_11A',
 							backgroundColor : gradientfill_temp,
 							borderColor : gradienstroke_temp,
 							borderWidth : 4,
@@ -215,13 +215,13 @@ let refMicro_11A = 'Micro_11A'
 			   const canva_humidite = document.getElementById('myChartHumidite');
 
 
-				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.width, 0, 0);
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
 
 				gradienstroke.addColorStop(0, "#F2F206");
 				gradienstroke.addColorStop(0.5, "#2AF206")
 				gradienstroke.addColorStop(1, "#0646F2");
 
-				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.width, 0, 0);
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
 
 				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
 				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
@@ -234,7 +234,7 @@ let refMicro_11A = 'Micro_11A'
 					data : {
 						labels : tab_time,
 						datasets : [{
-							label : 'test courbe humidité Micro_11A',
+							label : 'Courbe humidité Micro_11A',
 							backgroundColor : gradientfill,
 							borderColor : gradienstroke,
 							borderWidth : 4,
