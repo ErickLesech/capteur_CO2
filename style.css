@@ -1,0 +1,12 @@
+.slide{
+	display: none;
+}
+
+.setSlideShow{
+	position: relative;
+}
+
+h1{
+	color: white;
+	background-color: black;
+}
