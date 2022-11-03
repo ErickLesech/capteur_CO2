@@ -1,12 +1,33 @@
-.slide{
-	display: none;
+* {box-sizing:border-box}
+
+.setSlideShow {
+	position: relative;
+	margin: auto;
 }
 
-.setSlideShow{
-	position: relative;
+div{
+	text-align: center;
 }
 
 h1{
 	color: white;
 	background-color: black;
+}
+
+.slide {
+	display: none;
+}
+
+.fade {
+  animation-name: slide;
+  animation-duration: 2.5s;
+}
+
+@keyframes slide {
+  from {
+  	transform: translateX(0%);
+  }
+  to {
+  	transform: translateX(-100%);
+  }
 }
