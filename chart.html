@@ -3,14 +3,35 @@
 <head>
 	<title>Test Chart.js</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 </head>
 <body>
-	<h1 style="text-align: center;">MICRO 1.1A</h1>
-	<div style="display: inline-block; text-align: center;">
-		<canvas style="display: inline; text-align: center;" id="myChartCo2" width="400" height="300"></canvas>
-		<canvas style="display: inline; text-align: center;" id="myChartTemperature" width="400" height="300"></canvas>
-		<canvas style="display: inline; text-align: center;" id="myChartHumidite" width="400" height="300"></canvas>
+	<div class="setSlideShow">
+	
+	<div class="slide fade">
+		<h1 style="text-align: center;">MICRO 1.1A</h1>
+		<canvas style="display: inline; text-align: center;" id="micro11a_myChartCo2" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="micro11a_myChartTemperature" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="micro11a_myChartHumidite" width="400" height="300"></canvas>
+	</div>
+
+
+	<div class="slide fade">
+		<h1 style="text-align: center;">MICRO 2.4</h1>
+		<canvas style="display: inline; text-align: center;" id="micro24_myChartCo2" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="micro24_myChartTemperature" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="micro24_myChartHumidite" width="400" height="300"></canvas>
+	</div>
+
+	<div class="slide fade">
+		<h1 style="text-align: center;">MICRO 2.5</h1>
+		<canvas style="display: inline; text-align: center;" id="micro25_myChartCo2" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="micro25_myChartTemperature" width="400" height="300"></canvas>
+		<canvas style="display: inline; text-align: center;" id="micro25_myChartHumidite" width="400" height="300"></canvas>
+	</div>
+
+
 	</div>
 
 	<script type='module'>
@@ -46,71 +67,63 @@
 
   var tempo
 
-  get((child(ref(db),'Micro_11A'))).then((snapshot) => {
-		  		if(snapshot.exists()){
-		  			console.log(snapshot.val())
-		  		}else {
-   					 console.log("No data available")
-  		}
-		}).catch((error) => {
- 		 console.error(error)
-		});
+	let refMicro_11A = 'Micro_11A'
+	let refMicro_24 = 'Micro_24'
+	let refMicro_25 = 'Micro_25'
 
-let refMicro_11A = 'Micro_11A'
 
-		get((child(ref(db),refMicro_11A))).then((snapshot) => {
-			snapshot.forEach(function(childSnapshot){
-				console.log("childsnapchot jour" + childSnapshot.val())
-				if(childSnapshot.exists()){
-					console.log("childsnapchot heure" + childSnapshot.val())
+	get((child(ref(db),refMicro_11A))).then((snapshot) => {
+		snapshot.forEach(function(childSnapshot){
+			console.log("childsnapchot jour" + childSnapshot.val())
+			if(childSnapshot.exists()){
+				console.log("childsnapchot heure" + childSnapshot.val())
 
-    					childSnapshot.forEach(function(childSnapshot){
-							console.log("childsnapchot min" + childSnapshot.val())
-							if(childSnapshot.exists()){
+   					childSnapshot.forEach(function(childSnapshot){
+						console.log("childsnapchot min" + childSnapshot.val())
+						if(childSnapshot.exists()){
 								//const childKey = childSnapshot.key + "";
     							//const childData = childSnapshot.val() + "";
 
-    							childSnapshot.forEach(function(childSnapshot){
+   							childSnapshot.forEach(function(childSnapshot){
 
-    								if(childSnapshot.exists()){
-										tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
-    									tab_time.push(childSnapshot.val().time + "")
-    									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
-    									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
-   
-       			 						console.log("valeur tab_time : " + tab_time)
-    			 						console.log("valeur tab_co2 : " + tab_co2)
+   								if(childSnapshot.exists()){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+   									tab_time.push(childSnapshot.val().time + "")
+   									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+   									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
+  
+   			 						console.log("valeur tab_time : " + tab_time)
+   			 						console.log("valeur tab_co2 : " + tab_co2)
 
-    			 						console.log("valeur tab_temperature : " + tab_temperature)
-    			 						console.log("valeur tab_humidite : " + tab_humidite)
+   			 						console.log("valeur tab_temperature : " + tab_temperature)
+   			 						console.log("valeur tab_humidite : " + tab_humidite)
     			 					
-    			 					}else{
-    			 						console.log("no data time and rate co2")
-    			 					}
-    			 				})
+   			 					}else{
+   			 						console.log("no data time and rate co2")
+   			 					}
+   			 				})
+   						}else{
 
-    						}else{
+   							console.log("no min childsnapshot")
+   						}
+   					})
 
-    							console.log("no min childsnapshot")
-    						}
-    					})
-
-    				}else{
-    					console.log("no hour exists")
-    				}
-    			})
+   				}else{
+   					console.log("no hour exists")
+   				}
+   			})
 		  		
-		}).then(() =>{
+	}).then(() =>{
 
 
-				const chart_co2 = document.getElementById('myChartCo2').getContext('2d');
-				const chart_temp = document.getElementById('myChartTemperature').getContext('2d');
-				const chart_humidite = document.getElementById('myChartHumidite').getContext('2d');
+				const chart_co2 = document.getElementById('micro11a_myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('micro11a_myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('micro11a_myChartHumidite').getContext('2d');
     			 
 
     			 // graphe pour le CO2
 
-				const canva = document.getElementById('myChartCo2');
+				const canva = document.getElementById('micro11a_myChartCo2');
 
 				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
 
@@ -178,7 +191,7 @@ let refMicro_11A = 'Micro_11A'
 
 				// graphe de temperature
 
-				const canva_temperature = document.getElementById('myChartTemperature');
+				const canva_temperature = document.getElementById('micro11a_myChartTemperature');
 
 
 				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
@@ -237,7 +250,7 @@ let refMicro_11A = 'Micro_11A'
 				// graphe d'humidité
 
 
-			   const canva_humidite = document.getElementById('myChartHumidite');
+			   const canva_humidite = document.getElementById('micro11a_myChartHumidite');
 
 
 				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
@@ -294,6 +307,493 @@ let refMicro_11A = 'Micro_11A'
 
 
 		}) // fin then
+
+get((child(ref(db),refMicro_24))).then((snapshot) => {
+		snapshot.forEach(function(childSnapshot){
+			console.log("childsnapchot jour" + childSnapshot.val())
+			if(childSnapshot.exists()){
+				console.log("childsnapchot heure" + childSnapshot.val())
+
+   					childSnapshot.forEach(function(childSnapshot){
+						console.log("childsnapchot min" + childSnapshot.val())
+						if(childSnapshot.exists()){
+								//const childKey = childSnapshot.key + "";
+    							//const childData = childSnapshot.val() + "";
+
+   							childSnapshot.forEach(function(childSnapshot){
+
+   								if(childSnapshot.exists()){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+   									tab_time.push(childSnapshot.val().time + "")
+   									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+   									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
+  
+   			 						console.log("valeur tab_time : " + tab_time)
+   			 						console.log("valeur tab_co2 : " + tab_co2)
+
+   			 						console.log("valeur tab_temperature : " + tab_temperature)
+   			 						console.log("valeur tab_humidite : " + tab_humidite)
+    			 					
+   			 					}else{
+   			 						console.log("no data time and rate co2")
+   			 					}
+   			 				})
+   						}else{
+
+   							console.log("no min childsnapshot")
+   						}
+   					})
+
+   				}else{
+   					console.log("no hour exists")
+   				}
+   			})
+		  		
+	}).then(() =>{
+
+
+				const chart_co2 = document.getElementById('micro24_myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('micro24_myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('micro24_myChartHumidite').getContext('2d');
+    			 
+
+    			 // graphe pour le CO2
+
+				const canva = document.getElementById('micro24_myChartCo2');
+
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#41fc03");
+				gradienstroke.addColorStop(0.5, "#c9f005")
+				gradienstroke.addColorStop(1, "#cf0617");
+
+
+				var gradientfill = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
+
+    			console.log("dans then valeur tab_co2 : " + tab_co2)
+
+				var data = {
+					labels : tab_time,
+					datasets : [{
+						label : 'Taux de CO2 dans la salle par rapport au temps',
+						backgroundColor : gradientfill,
+						borderColor : gradienstroke,
+						borderWidth : 4,
+						radius : 1,
+						data: tab_co2,
+						fill : true,
+				
+					}],
+
+					
+				}
+
+				var options = {
+					responsive : false,
+					scales:{
+						y:{
+							title : {
+								display: true,
+								text : 'En ppm',
+								weight : 'bold'
+							}
+						}
+					},
+					plugins:{
+						title:{
+						 	display: true
+        				},
+        				legend:{
+        					display : true,
+        					label : 'ppm'
+        				}
+        			}
+				}
+
+				var config = {
+					type : 'line',
+					data : data,
+					options : options
+					
+				}
+
+				const myChart = new Chart(chart_co2, config);
+
+
+				// graphe de temperature
+
+				const canva_temperature = document.getElementById('micro24_myChartTemperature');
+
+
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradienstroke_temp.addColorStop(0, "#4A19DA");
+				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#DA192D");
+
+
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
+				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+
+				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
+
+
+
+				var config2 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Température de la salle par rapport au temps',
+							backgroundColor : gradientfill_temp,
+							borderColor : gradienstroke_temp,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_temperature,
+							fill : true,
+				
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En °C'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
+					}
+
+				}
+
+				const myChart2 = new Chart(chart_temp, config2);
+
+				// graphe d'humidité
+
+
+			   const canva_humidite = document.getElementById('micro24_myChartHumidite');
+
+
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#F2F206");
+				gradienstroke.addColorStop(0.5, "#2AF206")
+				gradienstroke.addColorStop(1, "#0646F2");
+
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(6, 70, 242 ,0.6)");
+
+
+				var config3 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Taux d\'humidité dans la salle par rapport au temps',
+							backgroundColor : gradientfill,
+							borderColor : gradienstroke,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_humidite,
+							fill : true,
+				
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En %'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
+					}
+
+				}
+
+				const myChart3 = new Chart(chart_humidite, config3);
+
+
+
+		}) // fin then
+
+get((child(ref(db),refMicro_25))).then((snapshot) => {
+		snapshot.forEach(function(childSnapshot){
+			console.log("childsnapchot jour" + childSnapshot.val())
+			if(childSnapshot.exists()){
+				console.log("childsnapchot heure" + childSnapshot.val())
+
+   					childSnapshot.forEach(function(childSnapshot){
+						console.log("childsnapchot min" + childSnapshot.val())
+						if(childSnapshot.exists()){
+								//const childKey = childSnapshot.key + "";
+    							//const childData = childSnapshot.val() + "";
+
+   							childSnapshot.forEach(function(childSnapshot){
+
+   								if(childSnapshot.exists()){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+   									tab_time.push(childSnapshot.val().time + "")
+   									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+   									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
+  
+   			 						console.log("valeur tab_time : " + tab_time)
+   			 						console.log("valeur tab_co2 : " + tab_co2)
+
+   			 						console.log("valeur tab_temperature : " + tab_temperature)
+   			 						console.log("valeur tab_humidite : " + tab_humidite)
+    			 					
+   			 					}else{
+   			 						console.log("no data time and rate co2")
+   			 					}
+   			 				})
+   						}else{
+
+   							console.log("no min childsnapshot")
+   						}
+   					})
+
+   				}else{
+   					console.log("no hour exists")
+   				}
+   			})
+		  		
+	}).then(() =>{
+
+
+				const chart_co2 = document.getElementById('micro25_myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('micro25_myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('micro25_myChartHumidite').getContext('2d');
+    			 
+
+    			 // graphe pour le CO2
+
+				const canva = document.getElementById('micro25_myChartCo2');
+
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#41fc03");
+				gradienstroke.addColorStop(0.5, "#c9f005")
+				gradienstroke.addColorStop(1, "#cf0617");
+
+
+				var gradientfill = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
+
+    			console.log("dans then valeur tab_co2 : " + tab_co2)
+
+				var data = {
+					labels : tab_time,
+					datasets : [{
+						label : 'Taux de CO2 dans la salle par rapport au temps',
+						backgroundColor : gradientfill,
+						borderColor : gradienstroke,
+						borderWidth : 4,
+						radius : 1,
+						data: tab_co2,
+						fill : true,
+				
+					}],
+
+					
+				}
+
+				var options = {
+					responsive : false,
+					scales:{
+						y:{
+							title : {
+								display: true,
+								text : 'En ppm',
+								weight : 'bold'
+							}
+						}
+					},
+					plugins:{
+						title:{
+						 	display: true
+        				},
+        				legend:{
+        					display : true,
+        					label : 'ppm'
+        				}
+        			}
+				}
+
+				var config = {
+					type : 'line',
+					data : data,
+					options : options
+					
+				}
+
+				const myChart = new Chart(chart_co2, config);
+
+
+				// graphe de temperature
+
+				const canva_temperature = document.getElementById('micro25_myChartTemperature');
+
+
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradienstroke_temp.addColorStop(0, "#4A19DA");
+				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#DA192D");
+
+
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
+				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+
+				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
+
+
+
+				var config2 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Température de la salle par rapport au temps',
+							backgroundColor : gradientfill_temp,
+							borderColor : gradienstroke_temp,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_temperature,
+							fill : true,
+				
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En °C'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
+					}
+
+				}
+
+				const myChart2 = new Chart(chart_temp, config2);
+
+				// graphe d'humidité
+
+
+			   const canva_humidite = document.getElementById('micro25_myChartHumidite');
+
+
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#F2F206");
+				gradienstroke.addColorStop(0.5, "#2AF206")
+				gradienstroke.addColorStop(1, "#0646F2");
+
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(6, 70, 242 ,0.6)");
+
+
+				var config3 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Taux d\'humidité dans la salle par rapport au temps',
+							backgroundColor : gradientfill,
+							borderColor : gradienstroke,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_humidite,
+							fill : true,
+				
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En %'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
+					}
+
+				}
+
+				const myChart3 = new Chart(chart_humidite, config3);
+
+
+
+		}) // fin then
+
+	let slideIndex = 0;
+	showSlides();
+
+	function showSlides() {
+  		let i;
+  		let slides = document.getElementsByClassName("slide");
+  		for (i = 0; i < slides.length; i++) {
+    		slides[i].style.display = "none";
+  		}
+  		slideIndex++;
+  		if (slideIndex > slides.length) {slideIndex = 1}
+  		slides[slideIndex-1].style.display = "block";
+  		setTimeout(showSlides, 10000); // Change image every 2 seconds
+}
 
 	
 		console.log("val fin de tab : " + tab_co2);
