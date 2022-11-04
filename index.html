@@ -1,14 +1,4 @@
-<!--
- Projet : Réalisation d’une application mesurant le taux de CO2 dans des salles.
 
- Responsable de projet: PASCAL BALLET
- Etudiants : CASSET LOUIS & GLOIRE BAYOUNDOULA
-
-Fichier index.html :
-	Interface Web d'affichage des courbes réprésentant le taux de CO2 d'une salle sur 24h 
-
-Date : 06/05/2022
--->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -16,722 +6,63 @@ Date : 06/05/2022
 		<title>GetMyCo2</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<style>
-			body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-			body {font-size:16px;}
-			.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-			.w3-half img:hover{opacity:1}
-			.btn btn-info{
-			  text-align: center;
-			}
-		</style>
+
+		<!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 		 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
 	</head>
 	<body>
-
-	<!-- Sidebar/menu -->
-	<nav class="w3-sidebar w3-deep-purple w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-	  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">X</a>
-	  <div class="w3-container">
-	  	<br>
-         <!-- logo UBO -->
-	  	<img src="https://firebasestorage.googleapis.com/v0/b/stagel3.appspot.com/o/images%2Flogo.png?alt=media&token=a910188b-d41e-4eb1-90b7-ec7c1b3fe1da"  style="width:100%"  onclick="onClick(this)" alt="logo">
-	    <h3 class="w3-padding-64"><b>Mesure du taux<br>de CO2 dans les salles</b></h3>
-	  </div>
-	  <div class="w3-bar-block">
-	    <a href="#graphe" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Courbes</a> 
-	    <a href="#presentation" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Présentation</a> 
-	    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Equipe</a> 
-	   
-	  </div>
-	</nav>
-
-	<!-- Top menu on small screens -->
-	<header class="w3-container w3-top w3-hide-large w3-purple w3-xlarge w3-padding">
-	  <a href="javascript:void(0)" class="w3-button w3-purple w3-margin-right" onclick="w3_open()">☰</a>
-	  <span>Détection du taux de CO2</span>
-	</header>
-
-	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
 	<!-- !PAGE CONTENT! -->
 
+	<div id="carouselExemple" class="container-fluid carousel slide bg-dark" data-ride="carousel">
+	<div class="carousel-inner">
+		<div style="text-align: center;" class="carousel-item active">
+			<h1 style="text-align: center;" class="text-white">MICRO 1.1A</h1>
+			<canvas class="col" style="display: inline; text-align: center;" id="micro11a_myChartCo2" width="400" height="300"></canvas>
+			<canvas class="col" style="display: inline; text-align: center;" id="micro11a_myChartTemperature" width="400" height="300"></canvas>
+			<canvas class="col" style="display: inline; text-align: center;" id="micro11a_myChartHumidite" width="400" height="300"></canvas>
+		</div>
 
 
-	<div class="w3-main" style="margin-left:340px;margin-right:40px">
+		<div style="text-align: center;" class="carousel-item">
+			<h1 style="text-align: center;" class="text-white">MICRO 2.4</h1>
+			<canvas class="col" style="display: inline; text-align: center;" id="micro24_myChartCo2" width="400" height="300"></canvas>
+			<canvas  class="col" style="display: inline; text-align: center;" id="micro24_myChartTemperature" width="400" height="300"></canvas>
+			<canvas  class="col" style="display: inline; text-align: center;" id="micro24_myChartHumidite" width="400" height="300"></canvas>
+		</div>
 
-	  <!-- Header -->
-	  <div class="w3-container" style="margin-top:80px" id="graphe">
-	    <h1 class="w3-jumbo"><b>Bienvenue sur Get My CO2</b></h1>
-	    <h1 class="w3-xxxlarge w3-text-purple"><b>Courbes journalières</b></h1>
-	    <hr style="width:50px;border:5px solid purple" class="w3-round">
-	  </div>
+		<div style="text-align: center;" class="carousel-item">
+			<h1 style="text-align: center;" class="text-white">MICRO 2.5</h1>
+			<canvas  class="col" style="display: inline; text-align: center;" id="micro25_myChartCo2" width="400" height="300"></canvas>
+			<canvas  class="col" style="display: inline; text-align: center;" id="micro25_myChartTemperature" width="400" height="300"></canvas>
+			<canvas  class="col" style="display: inline; text-align: center;" id="micro25_myChartHumidite" width="400" height="300"></canvas>
 
+		</div>
+	</div>
 
-	 <div>
-	 	<center>
-	 		<a> Si vous activez une des options, les boutons des autres disparaîtront, désactivez-la afin de les réafficher.</a>
-	 	</center>
-	 </div>
-
-
-	<div style="margin-top:80px"id ="t1">
-		<center>
-
-	  		<a>Afficher/Désafficher la mosaïque :</a>
-	  	</center>
-
+	 <a class="carousel-control-prev" href="#carouselExemple" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExemple" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 	</div>
 
 
-	<div class="w3-container" id="b2">
-		<center>
-			<br>
-			<a class="btn btn-info" id="togg12" title="togg12">Mosaïque</a>
-		</center>
-	</div>
+    <script type='module'>
 
+	//import firebase library
 
-	<div style="margin-top:80px"id ="t2">
-		<center>
-	  		<a>Sélectionnez la(les) courbe(s) à afficher :</a>
-	  	</center>
-
-	</div>
-
-
-	<div class="w3-container" id="b1">
-		<center>
-		  <br>
-		  <a id="togg1" title="togg1" class="btn btn-info">Micro 1.1-A</a>
-		  <a id="togg13" title="togg13" class="btn btn-info">Micro 1.1-B</a>
-		  <a id="togg2" title="togg2" class="btn btn-info">Micro 1.2</a>
-		  <a id="togg3" title="togg3" class="btn btn-info">Micro 1.3</a>
-		  <a id="togg4" title="togg4" class="btn btn-info">Micro 1.4</a>
-		  <a id="togg5" title="togg5" class="btn btn-info">Micro 1.5</a>
-		  <a id="togg6" title="togg6" class="btn btn-info">Micro 2.1</a>
-		  <a id="togg7" title="togg7" class="btn btn-info">Micro 2.2</a>
-		  <a id="togg8" title="togg8" class="btn btn-info">Micro 2.3</a>
-		  <a id="togg9" title="togg9" class="btn btn-info">Micro 2.4</a>
-		  <a id="togg10" title="togg10" class="btn btn-info">Micro 2.5</a>
-		  <a id="togg11" title="togg11" class="btn btn-info">Micro 2.6</a>
-		</center>
-	</div>
-
-
-	   <!-- Graphe CO2 -->
-
- 	<div id ="d1" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe2">
- 		
-	 	<p>
-			<center>
-				Micro 1.1-A
-			</center>
-		</p>
-	  	<canvas id="myChart" width="300" height="100" class="w3-pale-yellow"></canvas>
-		<p>
-			<center>
-				Temps (H)
-			</center>
-		</p>
-		 
-
-	 </div>
-
-	 <div id ="d12" class="w3-container w3-row-padding"  style="margin-top:80px" id="graphe13">
-<!--w3-container w3-row-padding-->
-			<p>
-				<center>
-					Micro 1.1-B
-				</center>
-			</p>
-
-
-			 
-			  	<canvas id="myChart12" width="300" height="100" class="w3-pale-yellow"></canvas>
-			
-		  
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-	</div>
-
-
-
-	<div id ="d2" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe3">
-		
-		<p>
-			<center>
-				Micro 1.2
-			</center>
-		</p>	
-		  <canvas id="myChart2" width="300" height="100" class="w3-pale-yellow"></canvas>
-		<p>
-			<center>
-				Temps (H)
-			</center>
-		</p>
-	</div>
-
-<div id ="d3" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe4">
-		<p>
-		<center>
-			Micro 1.3
-		</center>
-	</p>
-
-
-	  	<canvas id="myChart3" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-
-		<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-<div id ="d4" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe5">
-		<p>
-		<center>
-			Micro 1.4
-		</center>
-	</p>
-
-
-		 
-	  	<canvas id="myChart4" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-
-		<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d5" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe6">
-
-		<p>
-		<center>
-			Micro 1.5
-		</center>
-	</p>
-
-
-	  	<canvas id="myChart5" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d6" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe7">
-
-		<p>
-		<center>
-			Micro 2.1
-		</center>
-	</p>
-
-
-		 
-	  	<canvas id="myChart6" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d7" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe8">
-
-		<p>
-		<center>
-			Micro 2.2
-		</center>
-	</p>
-
-
-		 
-	  	<canvas id="myChart7" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d8" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe9">
-
-		<p>
-		<center>
-			Micro 2.3
-		</center>
-	</p>
-
-
-		 
-	  	<canvas id="myChart8" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d9" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe10">
-
-		<p>
-		<center>
-			Micro 2.4
-		</center>
-	</p>
-
-
-		
-	  	<canvas id="myChart9" width="300" height="100" class="w3-pale-yellow"></canvas>
-
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d10" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe11">
-
-		<p>
-		<center>
-			Micro 2.5
-	</center>
-	</p>
-
-	  	<canvas id="myChart10" 0="300" height="100" class="w3-pale-yellow"></canvas>
-
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-	<div id ="d11" class="w3-container w3-row-padding" style="margin-top:80px" id="graphe12">
-
-		<p>
-		<center>
-			Micro 2.6
-		</center>
-	</p>
-
-	  	<canvas id="myChart11" width="300" height="100" class="w3-pale-yellow"></canvas>
-	
-	  
-	<p>
-		<center>
-			Temps (H)
-		</center>
-	</p>
-</div>
-
-
-	<!-- le conteneur fenêtre -->
-	<div style="margin-top:80px" id ="t3">
-		<center>
-	  		<a>Activer/Désactiver l'affichage dynamique :</a>
-	  	</center>
-
-	</div>
-
-	<div class="w3-container">
-		<center>
-		  <br>
-		  <button id="togg14" class="btn btn-success">Affichage dynamique</button><br>
-		</center>
-	</div>
-
-
-
-<center>
-<div class="w3-container" id="f1">
-	<div class="w3-container" id="les3p">
-	 <div class="w3-row-padding">
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 1.1-A
-				</center>
-			</p>
-			<canvas id="myChart13" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 1.1-B
-				</center>
-			</p>
-			<canvas id="myChart14" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-		<div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 1.2
-				</center>
-			</p>
-			<canvas id="myChart15" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-	   
-	  </div>
-	  <div class="w3-row-padding">
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 1.3
-				</center>
-			</p>
-			<canvas id="myChart16" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 1.4
-				</center>
-			</p>
-			<canvas id="myChart17" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-		<div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 1.5
-				</center>
-			</p>
-			<canvas id="myChart18" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-	   
-	  </div>
- </div>
- <div class="w3-container"  id="les3s">
-	  <div class="w3-row-padding">
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 2.1
-				</center>
-			</p>
-			<canvas id="myChart19" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 2.2
-				</center>
-			</p>
-			<canvas id="myChart20" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-		<div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 2.3
-				</center>
-			</p>
-			<canvas id="myChart21" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-	   
-	  </div>
-	  <div class="w3-row-padding">
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 2.4
-				</center>
-			</p>
-			<canvas id="myChart22" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-
-	    <div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 2.5
-				</center>
-			</p>
-			<canvas id="myChart23" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-		<div class="w3-third">
-	    		
-			<p>
-				<center>
-					Micro 2.6
-				</center>
-			</p>
-			<canvas id="myChart24" width="400" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-	   
-	  </div>
-	  
-	</div>
-</div>
-</center>
-<a> *PPM : Particules Par Millions</a>
-	<!--<div class="marquee-rtl" id="f1">
-	
-		<div>		
-			<p>
-				<center>
-					Micro 1.1-A
-				</center>
-			</p>
-			<canvas id="myChart13" width="300" height="100" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-			<br>
-			<p>
-				<center>
-					Micro 1.1-B
-				</center>
-			</p>
-			<canvas id="myChart14" width="300" height="100" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-			<p>
-				<center>
-					Micro 1.2
-				</center>
-			</p>
-			<canvas id="myChart15" width="300" height="100" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-			<br>
-			<p>
-				<center>
-					Micro 1.3
-				</center>
-			</p>
-			<canvas id="myChart16" width="300" height="100" class="w3-pale-yellow"></canvas>
-			<p>
-				<center>
-					Temps (H)
-				</center>
-			</p>
-		</div>
-	</div>-->
-
-
-	<!--<marquee align="center" style="border:solid" height="300" scrolldelay="5" scrollamount="3" onmouseout="this.start()" onmouseover="this.stop()" >
-<p><canvas id="myChart13" style="width:10% height:10%" class="w3-pale-yellow"></canvas><canvas id="myChart14" width="100" height="50" class="w3-pale-yellow"></canvas>
-</p></marquee>-->
-
-	  <!-- Modal for full size images on click-->
-	  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-	    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-	    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-	      <img id="img01" class="w3-image">
-	      <p id="caption"></p>
-	    </div>
-	  </div>
-
-	  <!-- presentation -->
-	  <div class="w3-container" id="presentation" style="margin-top:75px">
-	    <h1 class="w3-xxxlarge w3-text-purple"><b>Présentation</b></h1>
-	    <hr style="width:50px;border:5px solid purple" class="w3-round">
-	    <p>Bonjour, nous sommes deux étudiants en troisième année de Licence Informatique qui, dans le cadre du stage de fin de Licence, réalisons une étude sur l'évolution du taux de CO2 dans les salles de TP du Département Informatique de la Faculté de Sciences de l'UBO.
-	    </p>
-	   
-	  </div>
-	 <!-- <div>
-	  <canvas id="myChart" width="300" height="100"></canvas>
-	</div>-->
-	  <!-- Designers -->
-	  <div class="w3-container" id="designers" style="margin-top:75px">
-	    <h1 class="w3-xxxlarge w3-text-purple"><b>Equipe</b></h1>
-	    <hr style="width:50px;border:5px solid purple" class="w3-round">
-	    <p>L'équipe de développement.</p>
-	    
-	    <p><b>Voici l'équipe qui a travaillé sur ce projet</b> :</p>
-	  </div>
-
-	  <!-- The Team -->
-	  <div class="w3-row-padding w3-grayscale">
-	    <div class="w3-col m4 w3-margin-bottom">
-	      <div class="w3-light-grey">
-
-            <!-- logo ballet -->
-	        <!--img src="https://firebasestorage.googleapis.com/v0/b/stagel3.appspot.com/o/images%2Fuserho.png?alt=media&token=fcdf7ec7-49a8-4b9d-825c-07b417295adf" alt="Pascal" style="width:25%"-->
-	        <div class="w3-container">
-	          <h3>Pascal BALLET</h3>
-	          <p class="w3-opacity">Enseignant - Chercheur</p>
-	          <p>Responsable de stage</p>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="w3-col m4 w3-margin-bottom">
-	      <div class="w3-light-grey">
-	        <!--img src="https://firebasestorage.googleapis.com/v0/b/stagel3.appspot.com/o/images%2Fuserfe.png?alt=media&token=56f354f3-e70a-430e-a655-9ed8cf2ffdfa" alt="Gloire" style="width:25%"-->
-	        <div class="w3-container">
-	          <h3>Gloire BAYOUNDOULA</h3>
-	          <p class="w3-opacity">Etudiante</p>
-	          <p>Développeuse</p>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="w3-col m4 w3-margin-bottom">
-	      <div class="w3-light-grey">
-             <!-- logo Louis -->
-	        <!--img src="https://firebasestorage.googleapis.com/v0/b/stagel3.appspot.com/o/images%2Fuserho.png?alt=media&token=fcdf7ec7-49a8-4b9d-825c-07b417295adf" alt="Louis" style="width:25%"-->
-	        <div class="w3-container">
-	          <h3>Louis CASSET</h3>
-	          <p class="w3-opacity">Etudiant</p>
-	          <p>Développeur</p>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-
-
-
-	<!-- End page content -->
-	</div>
-
-	<!-- W3.CSS Container -->
-	
-
-	<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
-		<p class="w3-right">
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved to UBO | This template is made by  <a>G.B</a> & <a>L.C</a>
-        </p>
-    </div>
-	<script>
-	// Script to open and close sidebar
-	function w3_open() {
-	  document.getElementById("mySidebar").style.display = "block";
-	  document.getElementById("myOverlay").style.display = "block";
-	}
-	 
-	function w3_close() {
-	  document.getElementById("mySidebar").style.display = "none";
-	  document.getElementById("myOverlay").style.display = "none";
-	}
-
-	// Modal Image Gallery
-	function onClick(element) {
-	  document.getElementById("img01").src = element.src;
-	  document.getElementById("modal01").style.display = "block";
-	  var captionText = document.getElementById("caption");
-	  captionText.innerHTML = element.alt;
-	}
-	</script>
-
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-	<script type="module">
-
-	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
-  	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js";
-
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js"
+  	import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js"
 		// Import the functions you need from the SDKs you need
-	import { getDatabase, ref, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+	import { getDatabase, ref, onValue, get, child } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js"
 
 		const firebaseConfig = {
     		apiKey: "AIzaSyASUdodD9B57Pq5mgmArHja6ZGeRfcMvBs",
@@ -744,1605 +75,774 @@ Date : 06/05/2022
     		measurementId: "G-D8QC3SKVT4"
   };
 
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig)
+  const analytics = getAnalytics(app)
 
-		  // Initialize Firebase
-		  const app = initializeApp(firebaseConfig);
-		  const analytics = getAnalytics(app);
+  const db = getDatabase()
 
-		  	const db = getDatabase();
-		  	console.log(db);
+  var tab_co2 = []
+  var tab_time = []
+  var tab_temperature = []
+  var tab_humidite = []
 
-		  	var test;
-		  	var tab = [];
-		  	var act_time = new Date().getHours();
-		  	var j = 0;
-		  	var i = act_time + 1;
-		  	var k = 0;
+  var tempo
 
-
-
-
-//--------------------------------------------- SALLE 1.2 -----------------------------------------------------
+	let refMicro_11A = 'Micro_11A'
+	let refMicro_24 = 'Micro_24'
+	let refMicro_25 = 'Micro_25'
 
 
-
-		//  	get((child(ref(db),'salle 12'))).then((snapshot) => {
-		/*  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
+	/****************************************************************************
+	Micro 1.1A
+	*****************************************************************************/
 
 
 
+	get((child(ref(db),refMicro_11A))).then((snapshot) => {
+		snapshot.forEach(function(childSnapshot){
+			console.log("childsnapchot jour" + childSnapshot.val())
+			if(childSnapshot.exists()){
+				console.log("childsnapchot heure" + childSnapshot.val())
+
+   					childSnapshot.forEach(function(childSnapshot){
+						console.log("childsnapchot min" + childSnapshot.val())
+						if(childSnapshot.exists()){
+								//const childKey = childSnapshot.key + "";
+    							//const childData = childSnapshot.val() + "";
+
+   							childSnapshot.forEach(function(childSnapshot){
+
+   								if(childSnapshot.exists()){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+   									tab_time.push(childSnapshot.val().time + "")
+   									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+   									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
+  
+   			 						console.log("valeur tab_time : " + tab_time)
+   			 						console.log("valeur tab_co2 : " + tab_co2)
+
+   			 						console.log("valeur tab_temperature : " + tab_temperature)
+   			 						console.log("valeur tab_humidite : " + tab_humidite)
+    			 					
+   			 					}else{
+   			 						console.log("no data time and rate co2")
+   			 					}
+   			 				})
+   						}else{
+
+   							console.log("no min childsnapshot")
+   						}
+   					})
+
+   				}else{
+   					console.log("no hour exists")
+   				}
+   			})
+		  		
+	}).then(() =>{
 
 
-		  		});
-		  	}).then( () => {
+				const chart_co2 = document.getElementById('micro11a_myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('micro11a_myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('micro11a_myChartHumidite').getContext('2d');
+    			 
 
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+    			 // graphe pour le CO2
+
+				const canva = document.getElementById('micro11a_myChartCo2');
+
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#41fc03");
+				gradienstroke.addColorStop(0.5, "#c9f005")
+				gradienstroke.addColorStop(1, "#cf0617");
+
+
+				var gradientfill = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
+
+    			console.log("dans then valeur tab_co2 : " + tab_co2)
+
+				var data = {
+					labels : tab_time,
+					datasets : [{
+						label : 'Taux de CO2 dans la salle par rapport au temps',
+						color : 'white',
+						backgroundColor : gradientfill,
+						borderColor : gradienstroke,
+						borderWidth : 4,
+						radius : 1,
+						data: tab_co2,
+						fill : true,				
+					}],
+
+					
+				}
+
+				var options = {
+					responsive : false,
+					scales:{
+						y:{
+							title : {
+								display: true,
+								text : 'En ppm',
+								weight : 'bold',
+								color : 'white'
+							}
+						}
+					},
+					plugins:{
+						title:{
+						 	display: true
+        				},
+        				legend:{
+        					display : true,
+        					label : 'ppm'
+        				}
+        			}
+				}
+
+				var config = {
+					type : 'line',
+					data : data,
+					options : options
+					
+				}
+
+				const myChart = new Chart(chart_co2, config);
+
+
+				// graphe de temperature
+
+				const canva_temperature = document.getElementById('micro11a_myChartTemperature');
+
+
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradienstroke_temp.addColorStop(0, "#4A19DA");
+				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#DA192D");
+
+
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
+				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+
+				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
+
+
+
+				var config2 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Température de la salle par rapport au temps',
+							backgroundColor : gradientfill_temp,
+							borderColor : gradienstroke_temp,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_temperature,
+							fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En °C',
+									color : 'white'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
 					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
+
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
+				const myChart2 = new Chart(chart_temp, config2);
+
+				// graphe d'humidité
 
 
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  	  const myChart2 = new Chart(
-			    document.getElementById('myChart2'),
-			    config
-			  );
-
-			  	  	  	  	  const myChart5 = new Chart(
-			    document.getElementById('myChart15'),
-			    config
-			  );
+			   const canva_humidite = document.getElementById('micro11a_myChartHumidite');
 
 
-			});*/
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#F2F206");
+				gradienstroke.addColorStop(0.5, "#2AF206")
+				gradienstroke.addColorStop(1, "#0646F2");
+
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(6, 70, 242 ,0.6)");
 
 
-
-//--------------------------------------------- Micro 11A-----------------------------------------------------
-
-
-			get((child(ref(db),'Micro 11A'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-		  				console.log("valeur : ",childSnpachot.val().taux_co2_moyen);
-
-			  			if (childSnpachot.val().time == j){
-			  				console.log("valeur taux_c02 : ",childSnpachot.val().taux_co2_moyen);
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-
-
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				var config3 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Taux d\'humidité dans la salle par rapport au temps',
+							backgroundColor : gradientfill,
+							borderColor : gradienstroke,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_humidite,
+							fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En %',
+									color : 'white'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
 					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
+
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
+				const myChart3 = new Chart(chart_humidite, config3);
 
 
 
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
+		}) // fin then
 
-			  const config2 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart13= new Chart(
-			    document.getElementById('myChart13'),
-			    config2
-			  );
-			  			  				  	const myChart= new Chart(
-			    document.getElementById('myChart'),
-			    config2
-			  );
+/****************************************************************************
+	Micro 2.4
+	*****************************************************************************/
 
 
-			});
+get((child(ref(db),refMicro_24))).then((snapshot) => {
+		snapshot.forEach(function(childSnapshot){
+			console.log("childsnapchot jour" + childSnapshot.val())
+			if(childSnapshot.exists()){
+				console.log("childsnapchot heure" + childSnapshot.val())
+
+   					childSnapshot.forEach(function(childSnapshot){
+						console.log("childsnapchot min" + childSnapshot.val())
+						if(childSnapshot.exists()){
+								//const childKey = childSnapshot.key + "";
+    							//const childData = childSnapshot.val() + "";
+
+   							childSnapshot.forEach(function(childSnapshot){
+
+   								if(childSnapshot.exists()){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+   									tab_time.push(childSnapshot.val().time + "")
+   									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+   									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
+  
+   			 						console.log("valeur tab_time : " + tab_time)
+   			 						console.log("valeur tab_co2 : " + tab_co2)
+
+   			 						console.log("valeur tab_temperature : " + tab_temperature)
+   			 						console.log("valeur tab_humidite : " + tab_humidite)
+    			 					
+   			 					}else{
+   			 						console.log("no data time and rate co2")
+   			 					}
+   			 				})
+   						}else{
+
+   							console.log("no min childsnapshot")
+   						}
+   					})
+
+   				}else{
+   					console.log("no hour exists")
+   				}
+   			})
+		  		
+	}).then(() =>{
 
 
+				const chart_co2 = document.getElementById('micro24_myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('micro24_myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('micro24_myChartHumidite').getContext('2d');
+    			 
+
+    			 // graphe pour le CO2
+
+				const canva = document.getElementById('micro24_myChartCo2');
+
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#41fc03");
+				gradienstroke.addColorStop(0.5, "#c9f005")
+				gradienstroke.addColorStop(1, "#cf0617");
 
 
-//--------------------------------------------- SALLE 1.1-B -----------------------------------------------------
+				var gradientfill = chart_co2.createLinearGradient(0, canva.height, 0, 0);
 
-/*
+				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
 
+				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
 
-			get((child(ref(db),'salle 11B'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
+    			console.log("dans then valeur tab_co2 : " + tab_co2)
 
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				var data = {
+					labels : tab_time,
+					datasets : [{
+						label : 'Taux de CO2 dans la salle par rapport au temps',
+						backgroundColor : gradientfill,
+						borderColor : gradienstroke,
+						borderWidth : 4,
+						radius : 1,
+						data: tab_co2,
+						fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
+					}],
+
 					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
-					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
+				var options = {
+					responsive : false,
+					scales:{
+						y:{
+							title : {
+								display: true,
+								text : 'En ppm',
+								weight : 'bold'
+							}
+						}
+					},
+					plugins:{
+						title:{
+						 	display: true
+        				},
+        				legend:{
+        					display : true,
+        					label : 'ppm'
+        				}
+        			}
 				}
 
+				var config = {
+					type : 'line',
+					data : data,
+					options : options
+					
+				}
+
+				const myChart = new Chart(chart_co2, config);
 
 
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
+				// graphe de temperature
 
-			  const config3 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart12= new Chart(
-			    document.getElementById('myChart12'),
-			    config3
-			  );
-			  			  				  	const myChart14= new Chart(
-			    document.getElementById('myChart14'),
-			    config3
-			  );
+				const canva_temperature = document.getElementById('micro24_myChartTemperature');
 
 
-			});
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradienstroke_temp.addColorStop(0, "#4A19DA");
+				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#DA192D");
 
 
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
-//--------------------------------------------- SALLE 1.3 -----------------------------------------------------
+				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
+				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+
+				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
 
 
 
-
-
-			get((child(ref(db),'salle 13'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				var config2 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Température de la salle par rapport au temps',
+							backgroundColor : gradientfill_temp,
+							borderColor : gradienstroke_temp,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_temperature,
+							fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En °C'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
 					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
+
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
+				const myChart2 = new Chart(chart_temp, config2);
+
+				// graphe d'humidité
 
 
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config3 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart16= new Chart(
-			    document.getElementById('myChart16'),
-			    config3
-			  );
-			  			  				  	const myChart3= new Chart(
-			    document.getElementById('myChart3'),
-			    config3
-			  );
+			   const canva_humidite = document.getElementById('micro24_myChartHumidite');
 
 
-			});
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#F2F206");
+				gradienstroke.addColorStop(0.5, "#2AF206")
+				gradienstroke.addColorStop(1, "#0646F2");
+
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(6, 70, 242 ,0.6)");
 
 
-//--------------------------------------------- SALLE 1.4 -----------------------------------------------------
-
-
-
-
-			get((child(ref(db),'salle 14'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				var config3 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Taux d\'humidité dans la salle par rapport au temps',
+							backgroundColor : gradientfill,
+							borderColor : gradienstroke,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_humidite,
+							fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En %'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
 					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
+
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
+				const myChart3 = new Chart(chart_humidite, config3);
 
 
 
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config4 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart17= new Chart(
-			    document.getElementById('myChart17'),
-			    config4
-			  );
-			  			  				  	const myChart4= new Chart(
-			    document.getElementById('myChart4'),
-			    config4
-			  );
+		}) // fin then
 
 
-			});
+/****************************************************************************
+	Micro 2.5
+	*****************************************************************************/
 
 
+get((child(ref(db),refMicro_25))).then((snapshot) => {
+		snapshot.forEach(function(childSnapshot){
+			console.log("childsnapchot jour" + childSnapshot.val())
+			if(childSnapshot.exists()){
+				console.log("childsnapchot heure" + childSnapshot.val())
 
-//--------------------------------------------- SALLE 1.5 -----------------------------------------------------
+   					childSnapshot.forEach(function(childSnapshot){
+						console.log("childsnapchot min" + childSnapshot.val())
+						if(childSnapshot.exists()){
+								//const childKey = childSnapshot.key + "";
+    							//const childData = childSnapshot.val() + "";
+
+   							childSnapshot.forEach(function(childSnapshot){
+
+   								if(childSnapshot.exists()){
+									tab_co2.push(childSnapshot.val().taux_de_CO2 + "")
+   									tab_time.push(childSnapshot.val().time + "")
+   									tab_temperature.push(childSnapshot.val().degre_de_temperature + "")
+   									tab_humidite.push(childSnapshot.val().taux_de_humidite + "")
+  
+   			 						console.log("valeur tab_time : " + tab_time)
+   			 						console.log("valeur tab_co2 : " + tab_co2)
+
+   			 						console.log("valeur tab_temperature : " + tab_temperature)
+   			 						console.log("valeur tab_humidite : " + tab_humidite)
+    			 					
+   			 					}else{
+   			 						console.log("no data time and rate co2")
+   			 					}
+   			 				})
+   						}else{
+
+   							console.log("no min childsnapshot")
+   						}
+   					})
+
+   				}else{
+   					console.log("no hour exists")
+   				}
+   			})
+		  		
+	}).then(() =>{
 
 
+				const chart_co2 = document.getElementById('micro25_myChartCo2').getContext('2d');
+				const chart_temp = document.getElementById('micro25_myChartTemperature').getContext('2d');
+				const chart_humidite = document.getElementById('micro25_myChartHumidite').getContext('2d');
+    			 
 
-			get((child(ref(db),'salle 15'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
+    			 // graphe pour le CO2
 
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
+				const canva = document.getElementById('micro25_myChartCo2');
 
-			  		}
+				var gradienstroke = chart_co2.createLinearGradient(0, canva.height, 0, 0);
 
-
-
+				gradienstroke.addColorStop(0, "#41fc03");
+				gradienstroke.addColorStop(0.5, "#c9f005")
+				gradienstroke.addColorStop(1, "#cf0617");
 
 
-		  		});
-		  	}).then( () => {
+				var gradientfill = chart_co2.createLinearGradient(0, canva.height, 0, 0);
 
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				gradientfill.addColorStop(0, "rgba(65, 252, 3, 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(201, 240, 5, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(207, 6, 23,0.6)");
+
+    			console.log("dans then valeur tab_co2 : " + tab_co2)
+
+				var data = {
+					labels : tab_time,
+					datasets : [{
+						label : 'Taux de CO2 dans la salle par rapport au temps',
+						backgroundColor : gradientfill,
+						borderColor : gradienstroke,
+						borderWidth : 4,
+						radius : 1,
+						data: tab_co2,
+						fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
+					}],
+
 					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
-					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
+				var options = {
+					responsive : false,
+					scales:{
+						y:{
+							title : {
+								display: true,
+								text : 'En ppm',
+								weight : 'bold'
+							}
+						}
+					},
+					plugins:{
+						title:{
+						 	display: true
+        				},
+        				legend:{
+        					display : true,
+        					label : 'ppm'
+        				}
+        			}
 				}
 
+				var config = {
+					type : 'line',
+					data : data,
+					options : options
+					
+				}
+
+				const myChart = new Chart(chart_co2, config);
 
 
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
+				// graphe de temperature
 
-			  const config5 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart18= new Chart(
-			    document.getElementById('myChart18'),
-			    config5
-			  );
-			  			  				  	const myChart5= new Chart(
-			    document.getElementById('myChart5'),
-			    config5
-			  );
+				const canva_temperature = document.getElementById('micro25_myChartTemperature');
 
 
-			});
+				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
+
+				gradienstroke_temp.addColorStop(0, "#4A19DA");
+				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#DA192D");
 
 
+				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
-//--------------------------------------------- SALLE 2.1 -----------------------------------------------------
+				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
+				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+
+				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
 
 
 
-			get((child(ref(db),'salle 21'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				var config2 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Température de la salle par rapport au temps',
+							backgroundColor : gradientfill_temp,
+							borderColor : gradienstroke_temp,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_temperature,
+							fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En °C'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
 					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
+
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
+				const myChart2 = new Chart(chart_temp, config2);
+
+				// graphe d'humidité
 
 
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config6 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart19= new Chart(
-			    document.getElementById('myChart19'),
-			    config6
-			  );
-			  			  				  	const myChart6= new Chart(
-			    document.getElementById('myChart6'),
-			    config6
-			  );
+			   const canva_humidite = document.getElementById('micro25_myChartHumidite');
 
 
-			});
+				var gradienstroke = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradienstroke.addColorStop(0, "#F2F206");
+				gradienstroke.addColorStop(0.5, "#2AF206")
+				gradienstroke.addColorStop(1, "#0646F2");
+
+				var gradientfill = chart_humidite.createLinearGradient(0, canva_humidite.height, 0, 0);
+
+				gradientfill.addColorStop(0, "rgba(42, 242, 6 , 0.5)");
+				gradientfill.addColorStop(0.5, "rgba(242, 242, 6, 0.5)")
+
+				gradientfill.addColorStop(1, "rgba(6, 70, 242 ,0.6)");
 
 
-//--------------------------------------------- SALLE 2.2 -----------------------------------------------------
-
-
-
-			get((child(ref(db),'salle 22'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
+				var config3 = {
+					type : 'line',
+					data : {
+						labels : tab_time,
+						datasets : [{
+							label : 'Taux d\'humidité dans la salle par rapport au temps',
+							backgroundColor : gradientfill,
+							borderColor : gradienstroke,
+							borderWidth : 4,
+							radius : 1,
+							data: tab_humidite,
+							fill : true,
 				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
+						}],
+
+					},
+					options : {
+						responsive : false,
+						scales:{
+							y:{
+								title : {
+									display: true,
+									text : 'En %'
+								}
+							}
+						},
+						plugins:{
+							title:{
+						 		display: true
+        					}
+        				}
 					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
+
 				}
 
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
+				const myChart3 = new Chart(chart_humidite, config3);
 
 
 
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
+		}) // fin then
 
-			  const config7 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
+$('.carousel').carousel();
 
-			  				  	const myChart20= new Chart(
-			    document.getElementById('myChart20'),
-			    config7
-			  );
-			  			  				  	const myChart7= new Chart(
-			    document.getElementById('myChart7'),
-			    config7
-			  );
+/*	let slideIndex = 0;
+	showSlides();
 
+	function showSlides() {
+  		let i;
+  		let slides = document.getElementsByClassName("slide");
+  		for (i = 0; i < slides.length; i++) {
+    		slides[i].style.display = "none";
+  		}
+  		slideIndex++;
+  		if (slideIndex > slides.length) {slideIndex = 1}
+  		slides[slideIndex-1].style.display = "block";
+  		setTimeout(showSlides, 10000); // Change image every 2 seconds
+}
 
-			});
+	
+		console.log("val fin de tab : " + tab_co2);*/
 
-
-
-//--------------------------------------------- SALLE 2.3 -----------------------------------------------------
-
-
-			get((child(ref(db),'salle 23'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
-				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
-					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
-				}
-
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
-
-
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config8 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart21= new Chart(
-			    document.getElementById('myChart21'),
-			    config8
-			  );
-			  			  				  	const myChart8= new Chart(
-			    document.getElementById('myChart8'),
-			    config8
-			  );
-
-
-			});
-
-
-//--------------------------------------------- SALLE 2.4 -----------------------------------------------------
-
-
-			get((child(ref(db),'salle 24'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
-				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
-					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
-				}
-
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
-
-
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config9 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart22= new Chart(
-			    document.getElementById('myChart22'),
-			    config9
-			  );
-			  			  				  	const myChart9= new Chart(
-			    document.getElementById('myChart9'),
-			    config9
-			  );
-
-
-			});
-
-
-//--------------------------------------------- SALLE 2.5 -----------------------------------------------------
-
-
-			get((child(ref(db),'salle 25'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
-				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
-					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
-				}
-
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
-
-
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config10 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart23= new Chart(
-			    document.getElementById('myChart23'),
-			    config10
-			  );
-			  			  				  	const myChart10= new Chart(
-			    document.getElementById('myChart10'),
-			    config10
-			  );
-
-
-			});
-
-
-//--------------------------------------------- SALLE 2.6 -----------------------------------------------------
-
-
-
-			get((child(ref(db),'salle 26'))).then((snapshot) => {
-		  		snapshot.forEach(function(childSnpachot){
-		  			for(j=0;j<=act_time;j++){
-			  			if (childSnpachot.val().time == j){
-			  				tab[(23-act_time)+j] = childSnpachot.val().taux_co2_moyen;
-			  			}
-			  		}
-
-			  		for(j=0;j<=23;j++){
-			  				tab[childSnpachot.val().time-act_time-1] = childSnpachot.val().taux_co2_moyen;
-
-			  		}
-
-
-
-
-
-		  		});
-		  	}).then( () => {
-
-				//Tableau permettant d'avoir les heures en décrémentant
-				//L'heure correspond à l'indice du tableau
-				var int_hours = [-24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6 , -5, -4, -3, -2, -1, 0];
-				
-				//Tableau labels : Tableau des heures (abscisse du graphe)
-				const labels = [];
-				 
-				 //Variable heure : retourne l'heure courante
-				var heure = new Date().getHours();
-				 
-				//variable dif_heure : différence d'heure en l'heure courante et minuit. 
-				//Par exemple s'il est 11h, on a  dif_heure= 24-11=13
-				//Dans la première boucle for, la variable dif_heure permet de remplir toutes les valeurs avant minuit
-				var dif_heure = 24-heure;
-				 
-				 //variable j : compteur décrémenté permettant de parcourir le tableau int_hours
-				let j=23;
-				for (let i = 0; i < dif_heure; i++) {
-					
-					if(int_hours.indexOf(new Date().getHours()-j)==24){
-						labels[i]=0;
-					}
-					else{
-						labels[i]= int_hours.indexOf(new Date().getHours()-j);
-					}
-					j--;
-				}
-
-				//Dans la deuxième boucle for, on continue de remplir le tableau à partir de l'indice = dif_heure jusqu'à 24.
-				for (let i = dif_heure; i < 24; i++) {
-					
-					labels[i]= new Date().getHours()-j;
-					j--;
-				}
-
-
-
-			  const data = {
-			    labels: labels,
-			    datasets: [{
-			      label: 'Evolution du taux de CO2 sur les dernières 24h en PPM*',
-			      backgroundColor: 'rgb(255, 255, 255)',
-			      borderColor: 'rgb(255, 99, 132)',
-			      data: [tab[0], tab[1], tab[2], tab[3], tab[4], tab[5], tab[6],tab[7], tab[8], tab[9], tab[10], tab[11], tab[12], tab[13], tab[14], tab[15], tab[16], tab[17], tab[18], tab[19], tab[20], tab[21], tab[22], tab[23] ],
-			    }]
-			  };
-
-			  const config11 = {
-			    type: 'line',
-			    data: data,
-			    options: {}
-			  };
-
-			  				  	const myChart24= new Chart(
-			    document.getElementById('myChart24'),
-			    config11
-			  );
-			  			  				  	const myChart11= new Chart(
-			    document.getElementById('myChart11'),
-			    config11
-			  );
-
-
-			});*/
-
-
-//--------------------------------------------- LISTE DES BOUTONS -----------------------------------------------------
-
-
-		d1.style.display = "none";
-		d2.style.display = "none";
-		d3.style.display = "none";
-		d4.style.display = "none";
-		d5.style.display = "none";
-		d6.style.display = "none";
-		d7.style.display = "none";
-		d8.style.display = "none";
-		d9.style.display = "none";
-		d10.style.display = "none";
-		d11.style.display = "none";
-		d12.style.display = "none";
-		f1.style.display = "none";
-
-		var count = 0;
-
-
-
-		//Quand on affiche une des div, on incrémente le compteur, quand on la cache on le décremente, c'est seulement a count = 0 que le bouton "Mosaique" est affiché.
-		togg1.addEventListener("click", () => {
-  			if(getComputedStyle(d1).display != "none"){
-    			d1.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d1.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    			t1.style.display ="none";
-    			t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-				togg2.addEventListener("click", () => {
-  			if(getComputedStyle(d2).display != "none"){
-    			d2.style.display = "none";
-      			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d2.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-						togg3.addEventListener("click", () => {
-  			if(getComputedStyle(d3).display != "none"){
-    			d3.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d3.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-								togg4.addEventListener("click", () => {
-  			if(getComputedStyle(d4).display != "none"){
-    			d4.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d4.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-										togg5.addEventListener("click", () => {
-  			if(getComputedStyle(d5).display != "none"){
-    			d5.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d5.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-												togg6.addEventListener("click", () => {
-  			if(getComputedStyle(d6).display != "none"){
-    			d6.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d6.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-														togg7.addEventListener("click", () => {
-  			if(getComputedStyle(d7).display != "none"){
-    			d7.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d7.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-																togg8.addEventListener("click", () => {
-  			if(getComputedStyle(d8).display != "none"){
-    			d8.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d8.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-																		togg9.addEventListener("click", () => {
-  			if(getComputedStyle(d9).display != "none"){
-    			d9.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d9.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-																				togg10.addEventListener("click", () => {
-  			if(getComputedStyle(d10).display != "none"){
-    			d10.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d10.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-																						togg11.addEventListener("click", () => {
-  			if(getComputedStyle(d11).display != "none"){
-    			d11.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d11.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-
-    			count = count + 1;
-  			}
-		})
-
-																						togg13.addEventListener("click", () => {
-  			if(getComputedStyle(d12).display != "none"){
-    			d12.style.display = "none";
-    			count = count - 1;
-    			if (count == 0){
-    				b2.style.display = "block";
-    				togg14.style.display ="block";
-    				t1.style.display ="block";
-    				t3.style.display ="block";
-    			}
-  			} else {
-    			d12.style.display = "block";
-    			b2.style.display = "none";
-    			togg14.style.display ="none";
-    				t1.style.display ="none";
-    				t3.style.display ="none";
-    			count = count + 1;
-  			}
-		})
-
-
-
-
-					togg12.addEventListener("click", () => {
-			document.getElementById('d1').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d2').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d3').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d4').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d5').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d6').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d7').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d8').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d9').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d10').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d11').className = "w3-col m4 w3-margin-bottom";
-			document.getElementById('d12').className = "w3-col m4 w3-margin-bottom";
-			  if(getComputedStyle(d1).display != "none"){
-			    d1.style.display = "none";
-			    b1.style.display = "block";
-			    togg14.style.display ="block";
-			    t2.style.display ="block";
-			    t3.style.display ="block";
-			    document.getElementById('d1').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d2').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d3').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d4').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d5').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d6').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d7').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d8').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d9').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d10').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d11').className = "w1-col m4 w1-margin-bottom";
-			    document.getElementById('d12').className = "w1-col m4 w1-margin-bottom";
-			  } else {
-			    d1.style.display = "block";
-			    b1.style.display = "none";
-			    togg14.style.display ="none";
-			    t2.style.display ="none";
-			    t3.style.display ="none";
-			  }
-			  if(getComputedStyle(d12).display != "none"){
-			    d12.style.display = "none";
-			  } else {
-			    d12.style.display = "block";
-			  }
-			  if(getComputedStyle(d2).display != "none"){
-			    d2.style.display = "none";
-			  } else {
-			    d2.style.display = "block";
-			  }
-			  if(getComputedStyle(d3).display != "none"){
-			    d3.style.display = "none";
-			  } else {
-			    d3.style.display = "block";
-			  }
-			  if(getComputedStyle(d4).display != "none"){
-			    d4.style.display = "none";
-			  } else {
-			    d4.style.display = "block";
-			  }
-			  if(getComputedStyle(d5).display != "none"){
-			    d5.style.display = "none";
-			  } else {
-			    d5.style.display = "block";
-			  }
-			  if(getComputedStyle(d6).display != "none"){
-			    d6.style.display = "none";
-			  } else {
-			    d6.style.display = "block";
-			  }
-			  if(getComputedStyle(d7).display != "none"){
-			    d7.style.display = "none";
-			  } else {
-			    d7.style.display = "block";
-			  }
-			  if(getComputedStyle(d8).display != "none"){
-			    d8.style.display = "none";
-			  } else {
-			    d8.style.display = "block";
-			  }
-			  if(getComputedStyle(d9).display != "none"){
-			    d9.style.display = "none";
-			  } else {
-			    d9.style.display = "block";
-			  }
-			  if(getComputedStyle(d10).display != "none"){
-			    d10.style.display = "none";
-			  } else {
-			    d10.style.display = "block";
-			  }
-			  if(getComputedStyle(d11).display != "none"){
-			    d11.style.display = "none";
-			  } else {
-			    d11.style.display = "block";
-			  }
-			})
-
-
-			//Mosaique => Si la mosaique est activé ( on le sait grâce a D1 ici ) alors on desactive les boutons de base, si la mosaique est desactivée on les remet.
-			function afficheDiv()
-			{
-				
-				if(getComputedStyle(les3p).display != "none")
-				{
-				
-					les3p.style.display = "none";
-					les3s.style.display = "block";
-					
-				}
-				else  
-				{
-				
-					les3p.style.display = "block";
-					les3s.style.display = "none";
-					
-				}
-				
-			}
-
-			f1.style.display = "none";
-			togg14.addEventListener("click", () => {
-					
-		  			if(getComputedStyle(f1).display != "none"){
-		    			f1.style.display = "none";
-		    			b1.style.display="block";
-		    			b2.style.display="block";
-		    			t2.style.display ="block";
-		    			t1.style.display ="block";
-		    			
-		  			} else {
-		  				setInterval(afficheDiv, 10000);
-		    			f1.style.display = "block"; 
-		    			les3s.style.display = "none";
-		    			les3p.style.display = "block";
-		    			b1.style.display="none";
-		    			b2.style.display="none";
-		    			t2.style.display ="none";
-		    			t1.style.display ="none";
-				    			
-		  			}
-				})
-
-
-	</script>
-
-	<script>
-$(document).ready(function() {
-  $('a#togg12').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg13').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg2').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg1').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg3').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg4').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg5').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg6').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg7').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg8').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg9').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg10').click(function() {
-    $(this).toggleClass("down");
-  });
-})
-
-$(document).ready(function() {
-  $('a#togg11').click(function() {
-    $(this).toggleClass("down");
-  });
-})
 </script>
+
 
 	</body>
 </html>
