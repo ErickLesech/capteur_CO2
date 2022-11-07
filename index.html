@@ -20,10 +20,15 @@
 
 		<!-- As a heading -->
 	<nav class="navbar" id="bandeau">
-		<img src="C:\Users\erick\OneDrive\Images\76020_logo-UBO-telechargement\logo-UBO-telechargement\logo-UBO.png" alt="img_UBO" width="200" height="100">
-		<img src="C:\Users\erick\OneDrive\Images\75978_logo-fac-sciences-telechargement\logo-fac-sciences-telechargement\logo-FAC-SCIENCES.png" alt="img_fac" width="300" height="100">
+		<div class="row">
+			<div class="col">
+				<img src="images\logo-UBO.png" alt="img_UBO" width="200" height="100">
+			</div>
+			<div class="col">
+				<img src="images\logo-FAC-SCIENCES.png" alt="img_fac" width="300" height="100">
 
-  		<span class="navbar-brand mb-0 h1">Navbar</span>
+			</div>
+		</div>
 	</nav>
 	<!-- !PAGE CONTENT! -->
 
@@ -930,24 +935,6 @@ get((child(ref(db),refMicro_25))).then((snapshot) => {
 		}) // fin then
 
 $('.carousel').carousel();
-
-/*	let slideIndex = 0;
-	showSlides();
-
-	function showSlides() {
-  		let i;
-  		let slides = document.getElementsByClassName("slide");
-  		for (i = 0; i < slides.length; i++) {
-    		slides[i].style.display = "none";
-  		}
-  		slideIndex++;
-  		if (slideIndex > slides.length) {slideIndex = 1}
-  		slides[slideIndex-1].style.display = "block";
-  		setTimeout(showSlides, 10000); // Change image every 2 seconds
-}
-
-	
-		console.log("val fin de tab : " + tab_co2);*/
 
 </script>
 
