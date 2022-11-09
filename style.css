@@ -1,33 +1,4 @@
-* {box-sizing:border-box}
-
-.setSlideShow {
-	position: relative;
-	margin: auto;
+#bandeau{
+	background-color: rgb(255,209,0);
 }
 
-div{
-	text-align: center;
-}
-
-h1{
-	color: white;
-	background-color: black;
-}
-
-.slide {
-	display: none;
-}
-
-.fade {
-  animation-name: slide;
-  animation-duration: 2.5s;
-}
-
-@keyframes slide {
-  from {
-  	transform: translateX(0%);
-  }
-  to {
-  	transform: translateX(-100%);
-  }
-}
