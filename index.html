@@ -32,40 +32,55 @@
 	</nav>
 	<!-- !PAGE CONTENT! -->
 
-	<div id="carouselExemple" class="container-fluid carousel slide bg-dark" data-ride="carousel">
+	<div id="carouselGraphe" class="container-fluid carousel slide bg-dark" data-ride="carousel">
+
+
 	<div class="carousel-inner">
 		<div style="text-align: center;" class="carousel-item active">
 			<h1 style="text-align: center;" class="text-white">MICRO 1.1A</h1>
-			<canvas class="col" style="display: inline; text-align: center;" id="micro11a_myChartCo2" width="400" height="300"></canvas>
-			<canvas class="col" style="display: inline; text-align: center;" id="micro11a_myChartTemperature" width="400" height="300"></canvas>
-			<canvas class="col" style="display: inline; text-align: center;" id="micro11a_myChartHumidite" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro11a_myChartCo2" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro11a_myChartTemperature" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro11a_myChartHumidite" width="400" height="300"></canvas>
 		</div>
 
 
 		<div style="text-align: center;" class="carousel-item">
 			<h1 style="text-align: center;" class="text-white">MICRO 2.4</h1>
-			<canvas class="col" style="display: inline; text-align: center;" id="micro24_myChartCo2" width="400" height="300"></canvas>
-			<canvas  class="col" style="display: inline; text-align: center;" id="micro24_myChartTemperature" width="400" height="300"></canvas>
-			<canvas  class="col" style="display: inline; text-align: center;" id="micro24_myChartHumidite" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro24_myChartCo2" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro24_myChartTemperature" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro24_myChartHumidite" width="400" height="300"></canvas>
 		</div>
 
 		<div style="text-align: center;" class="carousel-item">
 			<h1 style="text-align: center;" class="text-white">MICRO 2.5</h1>
-			<canvas  class="col" style="display: inline; text-align: center;" id="micro25_myChartCo2" width="400" height="300"></canvas>
-			<canvas  class="col" style="display: inline; text-align: center;" id="micro25_myChartTemperature" width="400" height="300"></canvas>
-			<canvas  class="col" style="display: inline; text-align: center;" id="micro25_myChartHumidite" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro25_myChartCo2" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro25_myChartTemperature" width="400" height="300"></canvas>
+			<canvas class="col-md-4" style="display: inline; text-align: center;" id="micro25_myChartHumidite" width="400" height="300"></canvas>
 
 		</div>
 	</div>
 
-	 <a class="carousel-control-prev" href="#carouselExemple" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExemple" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+	 <a class="carousel-control-prev" href="#carouselGraphe" role="button" data-slide="prev">
+    	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    	<span class="sr-only">Previous</span>
+  	</a>
+  	<a class="carousel-control-next" href="#carouselGraphe" role="button" data-slide="next">
+   	 	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+   	 	<span class="sr-only">Next</span>
+ 	 </a>
+	</div>
+
+	<div class="container p-3 my-3 bg-light">
+		<p class="h2">Introduction</p>
+		<p class="text-justify">Le but de cette page web est d'informer les enseignants et les etudiants 
+		du département informatique de connaître le taux de CO2, de température et d'humidité contenu dans une salle
+		afin de sensibiliser sur le danger de la propagation d'agents infectieux dans les pièces non aéré.</p>
+		<p class="h2">Mesure de sécurité</p>
+		<p class="text-justify">Le capteurs installés dans les salles alerteront les personnes ci-trouvant avec une alarme, si vous entendez le signal :<p>
+			<ul>
+				<li>Vous pouvez ouvrir les fenêtres !</li>
+				<li>Portez un masque !</li>
+			</ul>
 	</div>
 
 
@@ -248,15 +263,15 @@
 
 				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
-				gradienstroke_temp.addColorStop(0, "#4A19DA");
-				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
-				gradienstroke_temp.addColorStop(1, "#DA192D");
+				gradienstroke_temp.addColorStop(0, "#3600D6");
+				//gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#BD0909");
 
 
 				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
 				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
-				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+				//gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
 
 				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
 
@@ -523,15 +538,15 @@ get((child(ref(db),refMicro_24))).then((snapshot) => {
 
 				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
-				gradienstroke_temp.addColorStop(0, "#4A19DA");
-				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
-				gradienstroke_temp.addColorStop(1, "#DA192D");
+				gradienstroke_temp.addColorStop(0, "#3600D6");
+				//gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#BD0909");
 
 
 				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
 				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
-				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+				//gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
 
 				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
 
@@ -800,15 +815,15 @@ get((child(ref(db),refMicro_25))).then((snapshot) => {
 
 				var gradienstroke_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
-				gradienstroke_temp.addColorStop(0, "#4A19DA");
-				gradienstroke_temp.addColorStop(0.5, "#DA19DA")
-				gradienstroke_temp.addColorStop(1, "#DA192D");
+				gradienstroke_temp.addColorStop(0, "#3600D6");
+				//gradienstroke_temp.addColorStop(0.5, "#DA19DA")
+				gradienstroke_temp.addColorStop(1, "#BD0909");
 
 
 				var gradientfill_temp = chart_temp.createLinearGradient(0, canva_temperature.height, 0, 0);
 
 				gradientfill_temp.addColorStop(0, "rgba(74, 25, 218, 0.5)");
-				gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
+				//gradientfill_temp.addColorStop(0.5, "rgba(218, 25, 218, 0.5)")
 
 				gradientfill_temp.addColorStop(1, "rgba(218, 25, 45,0.6)");
 
